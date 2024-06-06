@@ -115,3 +115,7 @@ azopenai:
   api_version: "2023-05-15"
   embedding_model: text-embedding-ada-002
   llm_model: gpt-35-turbo
+
+ovhai:
+  api_key:
+  api_base:

@@ -166,7 +166,7 @@ class HuggingFaceSettings(BaseModel):
 
 
 class EmbeddingSettings(BaseModel):
-    mode: Literal["huggingface", "openai", "azopenai", "sagemaker", "ollama", "mock"]
+    mode: Literal["huggingface", "openai", "azopenai", "sagemaker", "ovhai", "ollama", "mock"]
     ingest_mode: Literal["simple", "batch", "parallel", "pipeline"] = Field(
         "simple",
         description=(
@@ -425,6 +425,17 @@ class QdrantSettings(BaseModel):
     )
 
 
+class OvhaiSettings(BaseModel):
+    api_key: str = Field(
+        None,
+        description="ovhai api key, see https://endpoints.ai.cloud.ovh.net/",
+    )
+    api_base: str = Field(
+        None,
+        description="ovhai api url, see https://endpoints.ai.cloud.ovh.net/",
+    )
+
+
 class Settings(BaseModel):
     server: ServerSettings
     data: DataSettings
@@ -437,6 +448,7 @@ class Settings(BaseModel):
     openai: OpenAISettings
     ollama: OllamaSettings
     azopenai: AzureOpenAISettings
+    ovhai: OvhaiSettings
     vectorstore: VectorstoreSettings
     nodestore: NodeStoreSettings
     rag: RagSettings

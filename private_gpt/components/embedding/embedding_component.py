@@ -100,6 +100,23 @@ class EmbeddingComponent:
                     azure_endpoint=azopenai_settings.azure_endpoint,
                     api_version=azopenai_settings.api_version,
                 )
+            case "ovhai":
+                try:
+                    from private_gpt.components.embedding.custom.ovhai import (
+                        OVHcloudAIEEmbeddings,
+                    )
+                except ImportError as e:
+                    raise ImportError(
+                        "ovhai dependencies not found, needs to be provided at private_gpt/components/embedding/custom"
+                    ) from e
+
+                api_key = settings.ovhai.api_key
+                api_base = settings.ovhai.api_base
+
+                self.embedding_model = OVHcloudAIEEmbeddings(
+                    api_key=api_key,
+                    api_base=api_base,
+                )
             case "mock":
                 # Not a random number, is the dimensionality used by
                 # the default embedding model
